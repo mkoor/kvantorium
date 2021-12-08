@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище kvantorium_dostizheniyaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="award_table">
+          <Key>
+            <PropertyRef Name="id_award" />
+          </Key>
+          <Property Name="id_award" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="id_participant" Type="int" />
+          <Property Name="id_subdivision" Type="int" />
+          <Property Name="id_direction" Type="int" />
+          <Property Name="id_level_ev" Type="int" />
+          <Property Name="year" Type="nvarchar(max)" />
+          <Property Name="result" Type="nvarchar(max)" />
+          <Property Name="id_mentor" Type="int" />
+        </EntityType>
+        <EntityType Name="direction_table">
+          <Key>
+            <PropertyRef Name="id_direction" />
+          </Key>
+          <Property Name="id_direction" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="level_table">
+          <Key>
+            <PropertyRef Name="id_level_ev" />
+          </Key>
+          <Property Name="id_level_ev" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="level_ev" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="mentor_table">
+          <Key>
+            <PropertyRef Name="id_mentor" />
+          </Key>
+          <Property Name="id_mentor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lastname" Type="nvarchar(max)" />
+          <Property Name="firstname" Type="nvarchar(max)" />
+          <Property Name="middlename" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="participant_table">
+          <Key>
+            <PropertyRef Name="id_participant" />
+          </Key>
+          <Property Name="id_participant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lastname" Type="nvarchar(max)" />
+          <Property Name="firstname" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="subdivision_table">
+          <Key>
+            <PropertyRef Name="id_subdivision" />
+          </Key>
+          <Property Name="id_subdivision" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_event_table_direction_table">
+          <End Role="direction_table" Type="Self.direction_table" Multiplicity="0..1" />
+          <End Role="award_table" Type="Self.award_table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="direction_table">
+              <PropertyRef Name="id_direction" />
+            </Principal>
+            <Dependent Role="award_table">
+              <PropertyRef Name="id_direction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_event_table_level_table">
+          <End Role="level_table" Type="Self.level_table" Multiplicity="0..1" />
+          <End Role="award_table" Type="Self.award_table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="level_table">
+              <PropertyRef Name="id_level_ev" />
+            </Principal>
+            <Dependent Role="award_table">
+              <PropertyRef Name="id_level_ev" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_event_table_mentor_table">
+          <End Role="mentor_table" Type="Self.mentor_table" Multiplicity="0..1" />
+          <End Role="award_table" Type="Self.award_table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mentor_table">
+              <PropertyRef Name="id_mentor" />
+            </Principal>
+            <Dependent Role="award_table">
+              <PropertyRef Name="id_mentor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_event_table_participant_table">
+          <End Role="participant_table" Type="Self.participant_table" Multiplicity="0..1" />
+          <End Role="award_table" Type="Self.award_table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="participant_table">
+              <PropertyRef Name="id_participant" />
+            </Principal>
+            <Dependent Role="award_table">
+              <PropertyRef Name="id_participant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_event_table_subdivision_table">
+          <End Role="subdivision_table" Type="Self.subdivision_table" Multiplicity="0..1" />
+          <End Role="award_table" Type="Self.award_table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subdivision_table">
+              <PropertyRef Name="id_subdivision" />
+            </Principal>
+            <Dependent Role="award_table">
+              <PropertyRef Name="id_subdivision" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище kvantorium_dostizheniyaModelContainer">
+          <EntitySet Name="award_table" EntityType="Self.award_table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="direction_table" EntityType="Self.direction_table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="level_table" EntityType="Self.level_table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mentor_table" EntityType="Self.mentor_table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="participant_table" EntityType="Self.participant_table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subdivision_table" EntityType="Self.subdivision_table" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_event_table_direction_table" Association="Self.FK_event_table_direction_table">
+            <End Role="direction_table" EntitySet="direction_table" />
+            <End Role="award_table" EntitySet="award_table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_table_level_table" Association="Self.FK_event_table_level_table">
+            <End Role="level_table" EntitySet="level_table" />
+            <End Role="award_table" EntitySet="award_table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_table_mentor_table" Association="Self.FK_event_table_mentor_table">
+            <End Role="mentor_table" EntitySet="mentor_table" />
+            <End Role="award_table" EntitySet="award_table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_table_participant_table" Association="Self.FK_event_table_participant_table">
+            <End Role="participant_table" EntitySet="participant_table" />
+            <End Role="award_table" EntitySet="award_table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_table_subdivision_table" Association="Self.FK_event_table_subdivision_table">
+            <End Role="subdivision_table" EntitySet="subdivision_table" />
+            <End Role="award_table" EntitySet="award_table" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="kvantorium_dostizheniyaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="award_table">
+          <Key>
+            <PropertyRef Name="id_award" />
+          </Key>
+          <Property Name="id_award" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_participant" Type="Int32" />
+          <Property Name="id_subdivision" Type="Int32" />
+          <Property Name="id_direction" Type="Int32" />
+          <Property Name="id_level_ev" Type="Int32" />
+          <Property Name="year" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="result" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_mentor" Type="Int32" />
+          <NavigationProperty Name="direction_table" Relationship="Self.FK_event_table_direction_table" FromRole="award_table" ToRole="direction_table" />
+          <NavigationProperty Name="level_table" Relationship="Self.FK_event_table_level_table" FromRole="award_table" ToRole="level_table" />
+          <NavigationProperty Name="mentor_table" Relationship="Self.FK_event_table_mentor_table" FromRole="award_table" ToRole="mentor_table" />
+          <NavigationProperty Name="participant_table" Relationship="Self.FK_event_table_participant_table" FromRole="award_table" ToRole="participant_table" />
+          <NavigationProperty Name="subdivision_table" Relationship="Self.FK_event_table_subdivision_table" FromRole="award_table" ToRole="subdivision_table" />
+        </EntityType>
+        <EntityType Name="direction_table">
+          <Key>
+            <PropertyRef Name="id_direction" />
+          </Key>
+          <Property Name="id_direction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="award_table" Relationship="Self.FK_event_table_direction_table" FromRole="direction_table" ToRole="award_table" />
+        </EntityType>
+        <EntityType Name="level_table">
+          <Key>
+            <PropertyRef Name="id_level_ev" />
+          </Key>
+          <Property Name="id_level_ev" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="level_ev" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="award_table" Relationship="Self.FK_event_table_level_table" FromRole="level_table" ToRole="award_table" />
+        </EntityType>
+        <EntityType Name="mentor_table">
+          <Key>
+            <PropertyRef Name="id_mentor" />
+          </Key>
+          <Property Name="id_mentor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="middlename" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="award_table" Relationship="Self.FK_event_table_mentor_table" FromRole="mentor_table" ToRole="award_table" />
+        </EntityType>
+        <EntityType Name="participant_table">
+          <Key>
+            <PropertyRef Name="id_participant" />
+          </Key>
+          <Property Name="id_participant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="award_table" Relationship="Self.FK_event_table_participant_table" FromRole="participant_table" ToRole="award_table" />
+        </EntityType>
+        <EntityType Name="subdivision_table">
+          <Key>
+            <PropertyRef Name="id_subdivision" />
+          </Key>
+          <Property Name="id_subdivision" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="award_table" Relationship="Self.FK_event_table_subdivision_table" FromRole="subdivision_table" ToRole="award_table" />
+        </EntityType>
+        <Association Name="FK_event_table_direction_table">
+          <End Role="direction_table" Type="Self.direction_table" Multiplicity="0..1" />
+          <End Role="award_table" Type="Self.award_table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="direction_table">
+              <PropertyRef Name="id_direction" />
+            </Principal>
+            <Dependent Role="award_table">
+              <PropertyRef Name="id_direction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_event_table_level_table">
+          <End Role="level_table" Type="Self.level_table" Multiplicity="0..1" />
+          <End Role="award_table" Type="Self.award_table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="level_table">
+              <PropertyRef Name="id_level_ev" />
+            </Principal>
+            <Dependent Role="award_table">
+              <PropertyRef Name="id_level_ev" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_event_table_mentor_table">
+          <End Role="mentor_table" Type="Self.mentor_table" Multiplicity="0..1" />
+          <End Role="award_table" Type="Self.award_table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mentor_table">
+              <PropertyRef Name="id_mentor" />
+            </Principal>
+            <Dependent Role="award_table">
+              <PropertyRef Name="id_mentor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_event_table_participant_table">
+          <End Role="participant_table" Type="Self.participant_table" Multiplicity="0..1" />
+          <End Role="award_table" Type="Self.award_table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="participant_table">
+              <PropertyRef Name="id_participant" />
+            </Principal>
+            <Dependent Role="award_table">
+              <PropertyRef Name="id_participant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_event_table_subdivision_table">
+          <End Role="subdivision_table" Type="Self.subdivision_table" Multiplicity="0..1" />
+          <End Role="award_table" Type="Self.award_table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subdivision_table">
+              <PropertyRef Name="id_subdivision" />
+            </Principal>
+            <Dependent Role="award_table">
+              <PropertyRef Name="id_subdivision" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="kvantorium_dostizheniyaEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="award_table" EntityType="Self.award_table" />
+          <EntitySet Name="direction_table" EntityType="Self.direction_table" />
+          <EntitySet Name="level_table" EntityType="Self.level_table" />
+          <EntitySet Name="mentor_table" EntityType="Self.mentor_table" />
+          <EntitySet Name="participant_table" EntityType="Self.participant_table" />
+          <EntitySet Name="subdivision_table" EntityType="Self.subdivision_table" />
+          <AssociationSet Name="FK_event_table_direction_table" Association="Self.FK_event_table_direction_table">
+            <End Role="direction_table" EntitySet="direction_table" />
+            <End Role="award_table" EntitySet="award_table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_table_level_table" Association="Self.FK_event_table_level_table">
+            <End Role="level_table" EntitySet="level_table" />
+            <End Role="award_table" EntitySet="award_table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_table_mentor_table" Association="Self.FK_event_table_mentor_table">
+            <End Role="mentor_table" EntitySet="mentor_table" />
+            <End Role="award_table" EntitySet="award_table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_table_participant_table" Association="Self.FK_event_table_participant_table">
+            <End Role="participant_table" EntitySet="participant_table" />
+            <End Role="award_table" EntitySet="award_table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_table_subdivision_table" Association="Self.FK_event_table_subdivision_table">
+            <End Role="subdivision_table" EntitySet="subdivision_table" />
+            <End Role="award_table" EntitySet="award_table" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище kvantorium_dostizheniyaModelContainer" CdmEntityContainer="kvantorium_dostizheniyaEntities1">
+          <EntitySetMapping Name="award_table">
+            <EntityTypeMapping TypeName="kvantorium_dostizheniyaModel.award_table">
+              <MappingFragment StoreEntitySet="award_table">
+                <ScalarProperty Name="id_award" ColumnName="id_award" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id_participant" ColumnName="id_participant" />
+                <ScalarProperty Name="id_subdivision" ColumnName="id_subdivision" />
+                <ScalarProperty Name="id_direction" ColumnName="id_direction" />
+                <ScalarProperty Name="id_level_ev" ColumnName="id_level_ev" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="result" ColumnName="result" />
+                <ScalarProperty Name="id_mentor" ColumnName="id_mentor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="direction_table">
+            <EntityTypeMapping TypeName="kvantorium_dostizheniyaModel.direction_table">
+              <MappingFragment StoreEntitySet="direction_table">
+                <ScalarProperty Name="id_direction" ColumnName="id_direction" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="level_table">
+            <EntityTypeMapping TypeName="kvantorium_dostizheniyaModel.level_table">
+              <MappingFragment StoreEntitySet="level_table">
+                <ScalarProperty Name="id_level_ev" ColumnName="id_level_ev" />
+                <ScalarProperty Name="level_ev" ColumnName="level_ev" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mentor_table">
+            <EntityTypeMapping TypeName="kvantorium_dostizheniyaModel.mentor_table">
+              <MappingFragment StoreEntitySet="mentor_table">
+                <ScalarProperty Name="id_mentor" ColumnName="id_mentor" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="middlename" ColumnName="middlename" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="participant_table">
+            <EntityTypeMapping TypeName="kvantorium_dostizheniyaModel.participant_table">
+              <MappingFragment StoreEntitySet="participant_table">
+                <ScalarProperty Name="id_participant" ColumnName="id_participant" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subdivision_table">
+            <EntityTypeMapping TypeName="kvantorium_dostizheniyaModel.subdivision_table">
+              <MappingFragment StoreEntitySet="subdivision_table">
+                <ScalarProperty Name="id_subdivision" ColumnName="id_subdivision" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
